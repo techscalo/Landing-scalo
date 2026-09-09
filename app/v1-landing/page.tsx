@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { sendLead } from "../../lib/sendLead";
+import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
+import { PhoneField } from "../../components/PhoneField";
 
 export default function V1Landing() {
   const [sent, setSent] = useState(false);
+  const [whatsappCode, setWhatsappCode] = useState(DEFAULT_COUNTRY_CODE);
+  const [whatsappNumber, setWhatsappNumber] = useState("");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -13,12 +17,16 @@ export default function V1Landing() {
       string,
       string
     >;
-    sessionStorage.setItem("scaloLead", JSON.stringify(data));
+    const whatsapp = `${whatsappCode}${whatsappNumber}`;
+    sessionStorage.setItem(
+      "scaloLead",
+      JSON.stringify({ ...data, whatsapp })
+    );
     sendLead({
       landing: "v1-landing",
       nombre: data.nombre,
       empresa: data.empresa,
-      whatsapp: data.whatsapp,
+      whatsapp,
       email: data.email,
       equipo: data.equipo,
       preocupacion: data.preocupacion,
@@ -86,11 +94,11 @@ export default function V1Landing() {
                 </div>
                 <div className="field">
                   <label>WhatsApp</label>
-                  <input
-                    required
-                    name="whatsapp"
-                    inputMode="tel"
-                    autoComplete="tel"
+                  <PhoneField
+                    code={whatsappCode}
+                    onCodeChange={setWhatsappCode}
+                    number={whatsappNumber}
+                    onNumberChange={setWhatsappNumber}
                   />
                 </div>
                 <div className="field">

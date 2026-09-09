@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { sendLead } from "../../lib/sendLead";
+import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
+import { PhoneField } from "../../components/PhoneField";
 
 type Area = "control" | "seguimiento" | "reactivacion" | "medicion";
 
@@ -70,6 +72,7 @@ export default function V1LeadMagnet() {
     whatsapp: "",
     email: "",
   });
+  const [whatsappCode, setWhatsappCode] = useState(DEFAULT_COUNTRY_CODE);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("scaloLead");
@@ -88,12 +91,13 @@ export default function V1LeadMagnet() {
 
   function startQuiz(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    sessionStorage.setItem("scaloLead", JSON.stringify(lead));
+    const whatsapp = `${whatsappCode}${lead.whatsapp}`;
+    sessionStorage.setItem("scaloLead", JSON.stringify({ ...lead, whatsapp }));
     sendLead({
       landing: "v1-leadmagnet",
       nombre: lead.nombre,
       empresa: lead.empresa,
-      whatsapp: lead.whatsapp,
+      whatsapp,
       email: lead.email,
     });
     setPhase("quiz");
@@ -133,7 +137,7 @@ export default function V1LeadMagnet() {
         landing: "v1-leadmagnet",
         nombre: lead.nombre,
         empresa: lead.empresa,
-        whatsapp: lead.whatsapp,
+        whatsapp: `${whatsappCode}${lead.whatsapp}`,
         email: lead.email,
         diagnostico: { puntaje: score, resultado: badge, areaFoco: focusKey },
         completedLeadMagnet: true,
@@ -237,13 +241,12 @@ export default function V1LeadMagnet() {
                     </div>
                     <div className="field">
                       <label>WhatsApp</label>
-                      <input
-                        required
-                        name="whatsapp"
-                        autoComplete="tel"
-                        value={lead.whatsapp}
-                        onChange={(e) =>
-                          setLead({ ...lead, whatsapp: e.target.value })
+                      <PhoneField
+                        code={whatsappCode}
+                        onCodeChange={setWhatsappCode}
+                        number={lead.whatsapp}
+                        onNumberChange={(v) =>
+                          setLead({ ...lead, whatsapp: v })
                         }
                       />
                     </div>
