@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sendLead } from "../../lib/sendLead";
 
 type Area = "control" | "seguimiento" | "reactivacion" | "medicion";
 
@@ -88,12 +89,6 @@ export default function V2LeadMagnet() {
     setState((prev) => ({ ...prev, [index]: value }));
   }
 
-  function submitGate(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    sessionStorage.setItem("scaloLeadV2", JSON.stringify(lead));
-    setShowResult(true);
-  }
-
   const score = Object.values(state).reduce((s, v) => s + v, 0);
   let pill = "",
     title = "",
@@ -126,6 +121,21 @@ export default function V2LeadMagnet() {
   const focusKey = (Object.entries(misses).sort(
     (a, b) => b[1] - a[1]
   )[0][0] as Area);
+
+  function submitGate(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    sessionStorage.setItem("scaloLeadV2", JSON.stringify(lead));
+    sendLead({
+      landing: "v2-leadmagnet",
+      nombre: lead.nombre,
+      empresa: lead.empresa,
+      whatsapp: lead.whatsapp,
+      email: lead.email,
+      diagnostico: { puntaje: score, resultado: pill, areaFoco: focusKey },
+      completedLeadMagnet: true,
+    });
+    setShowResult(true);
+  }
 
   return (
     <>

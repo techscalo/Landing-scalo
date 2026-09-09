@@ -2,14 +2,25 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { sendLead } from "../../lib/sendLead";
 
 export default function V2Landing() {
   const [sent, setSent] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<
+      string,
+      string
+    >;
     sessionStorage.setItem("scaloLeadV2", JSON.stringify(data));
+    sendLead({
+      landing: "v2-landing",
+      nombre: data.nombre,
+      empresa: data.empresa,
+      whatsapp: data.whatsapp,
+      email: data.email,
+    });
     setSent(true);
   }
 
