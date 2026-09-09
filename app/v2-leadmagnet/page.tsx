@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { sendLead } from "../../lib/sendLead";
+import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
+import { PhoneField } from "../../components/PhoneField";
 
 type Area = "control" | "seguimiento" | "reactivacion" | "medicion";
 
@@ -60,6 +62,7 @@ export default function V2LeadMagnet() {
   const [state, setState] = useState<Record<number, number>>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [whatsappCode, setWhatsappCode] = useState(DEFAULT_COUNTRY_CODE);
   const [lead, setLead] = useState({
     nombre: "",
     empresa: "",
@@ -124,12 +127,16 @@ export default function V2LeadMagnet() {
 
   function submitGate(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    sessionStorage.setItem("scaloLeadV2", JSON.stringify(lead));
+    const whatsapp = `${whatsappCode}${lead.whatsapp}`;
+    sessionStorage.setItem(
+      "scaloLeadV2",
+      JSON.stringify({ ...lead, whatsapp })
+    );
     sendLead({
       landing: "v2-leadmagnet",
       nombre: lead.nombre,
       empresa: lead.empresa,
-      whatsapp: lead.whatsapp,
+      whatsapp,
       email: lead.email,
       diagnostico: { puntaje: score, resultado: pill, areaFoco: focusKey },
       completedLeadMagnet: true,
@@ -256,13 +263,11 @@ export default function V2LeadMagnet() {
                   </div>
                   <div className="field">
                     <label>WhatsApp</label>
-                    <input
-                      required
-                      name="whatsapp"
-                      value={lead.whatsapp}
-                      onChange={(e) =>
-                        setLead({ ...lead, whatsapp: e.target.value })
-                      }
+                    <PhoneField
+                      code={whatsappCode}
+                      onCodeChange={setWhatsappCode}
+                      number={lead.whatsapp}
+                      onNumberChange={(v) => setLead({ ...lead, whatsapp: v })}
                     />
                   </div>
                   <div className="field">
