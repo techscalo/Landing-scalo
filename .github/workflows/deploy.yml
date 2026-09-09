@@ -1,0 +1,38 @@
+name: Deploy a Vercel (Producción)
+
+on:
+  push:
+    branches: [main]
+
+# Evita deploys pisándose si se pushea seguido
+concurrency:
+  group: vercel-prod
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: team_UYnSixWLk8iR1V1x7sAziDyT
+  VERCEL_PROJECT_ID: prj_5xPSy87MCNv5BvWR2c8buxgVfu0K
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Vercel pull (config de producción)
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Vercel build
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Vercel deploy (producción)
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
