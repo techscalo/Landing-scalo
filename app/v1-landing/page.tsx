@@ -186,6 +186,10 @@ export default function V1Landing() {
       </footer>
 
       <style jsx global>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
+        .panel, .side, .modalbox, .card, .formgrid, .field, .grid > * { min-width: 0; }
+        select, input, textarea { min-width: 0; max-width: 100%; }
+
         :root {
           --light: #e3e3e3;
           --ink: #1c1a1b;
