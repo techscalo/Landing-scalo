@@ -267,7 +267,7 @@ export default function V2LeadMagnet() {
                       }
                     />
                   </div>
-                  <button className="submit">VER MI RESULTADO →</button>
+                  <button className="submit">ENVIAR →</button>
                 </div>
               </form>
             </div>
@@ -290,6 +290,10 @@ export default function V2LeadMagnet() {
       </div>
 
       <style jsx global>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
+        .panel, .side, .modalbox, .card, .formgrid, .field, .grid > * { min-width: 0; }
+        select, input, textarea { min-width: 0; max-width: 100%; }
+
         :root {
           --ink: #1c1a1b;
           --blue: #38546c;
