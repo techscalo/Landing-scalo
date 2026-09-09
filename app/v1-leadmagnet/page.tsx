@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { sendLead } from "../../lib/sendLead";
 
 type Area = "control" | "seguimiento" | "reactivacion" | "medicion";
 
@@ -88,7 +89,35 @@ export default function V1LeadMagnet() {
   function startQuiz(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     sessionStorage.setItem("scaloLead", JSON.stringify(lead));
+    sendLead({
+      landing: "v1-leadmagnet",
+      nombre: lead.nombre,
+      empresa: lead.empresa,
+      whatsapp: lead.whatsapp,
+      email: lead.email,
+    });
     setPhase("quiz");
+  }
+
+  function computeResult(list: { value: number; area: Area }[]) {
+    const score = list.reduce((s, a) => s + a.value, 0);
+    const badge =
+      score >= 8
+        ? "Sistema aceitado"
+        : score >= 5
+        ? "Perdiendo eficiencia"
+        : "Fugas comerciales";
+    const misses: Record<Area, number> = {
+      control: 0,
+      seguimiento: 0,
+      reactivacion: 0,
+      medicion: 0,
+    };
+    list.forEach((a) => {
+      if (!a.value) misses[a.area]++;
+    });
+    const focusKey = Object.entries(misses).sort((a, b) => b[1] - a[1])[0][0] as Area;
+    return { score, badge, focusKey };
   }
 
   function answer(value: number) {
@@ -99,6 +128,16 @@ export default function V1LeadMagnet() {
     } else {
       setAnswers(next);
       setPhase("result");
+      const { score, badge, focusKey } = computeResult(next);
+      sendLead({
+        landing: "v1-leadmagnet",
+        nombre: lead.nombre,
+        empresa: lead.empresa,
+        whatsapp: lead.whatsapp,
+        email: lead.email,
+        diagnostico: { puntaje: score, resultado: badge, areaFoco: focusKey },
+        completedLeadMagnet: true,
+      });
     }
   }
 
