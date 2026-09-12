@@ -133,7 +133,7 @@ export default function V2LeadMagnet() {
       JSON.stringify({ ...lead, whatsapp })
     );
     sendLead({
-      landing: "v2-leadmagnet",
+      landing: "b-leadmagnet",
       nombre: lead.nombre,
       empresa: lead.empresa,
       whatsapp,
@@ -150,7 +150,7 @@ export default function V2LeadMagnet() {
         <div className="wrap nav">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/scalo-white.png" alt="SCALO" />
-          <a href="/v2-landing">← Volver a la landing</a>
+          <a href="/b">← Volver a la landing</a>
         </div>
       </header>
       <main>
@@ -296,7 +296,7 @@ export default function V2LeadMagnet() {
               <h3>{title}</h3>
               <p>{text}</p>
               <div className="focus">{focusMsg[focusKey]}</div>
-              <a className="rcta" href="/v2-landing#contacto">
+              <a className="rcta" href="/b#contacto">
                 QUIERO REVISAR ESTO CON SCALO →
               </a>
             </div>

@@ -23,7 +23,7 @@ export default function V1Landing() {
       JSON.stringify({ ...data, whatsapp })
     );
     sendLead({
-      landing: "v1-landing",
+      landing: "a",
       nombre: data.nombre,
       empresa: data.empresa,
       whatsapp,
@@ -43,7 +43,7 @@ export default function V1Landing() {
             <img className="logo" src="/scalo-black.png" alt="SCALO" />
             <span className="micro">Scalo System™</span>
           </div>
-          <Link className="toplink" href="/v1-leadmagnet">
+          <Link className="toplink" href="/a-leadmagnet">
             Diagnóstico gratis →
           </Link>
         </div>
@@ -66,7 +66,7 @@ export default function V1Landing() {
               <a className="btn primary" href="#auditoria">
                 Solicitar auditoría
               </a>
-              <Link className="btn secondary" href="/v1-leadmagnet">
+              <Link className="btn secondary" href="/a-leadmagnet">
                 Medir mi sistema en 2 min
               </Link>
             </div>
@@ -194,7 +194,7 @@ export default function V1Landing() {
                 sistema comercial.
               </p>
             </div>
-            <Link className="btn" href="/v1-leadmagnet">
+            <Link className="btn" href="/a-leadmagnet">
               HACER EL TEST GRATIS →
             </Link>
           </div>

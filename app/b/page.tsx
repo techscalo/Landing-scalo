@@ -23,7 +23,7 @@ export default function V2Landing() {
       JSON.stringify({ ...data, whatsapp })
     );
     sendLead({
-      landing: "v2-landing",
+      landing: "b",
       nombre: data.nombre,
       empresa: data.empresa,
       whatsapp,
@@ -38,7 +38,7 @@ export default function V2Landing() {
         <div className="wrap nav">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="logo" src="/scalo-white.png" alt="SCALO" />
-          <Link href="/v2-leadmagnet">Test comercial · 2 min →</Link>
+          <Link href="/b-leadmagnet">Test comercial · 2 min →</Link>
         </div>
       </header>
       <main>
@@ -55,7 +55,7 @@ export default function V2Landing() {
               <strong>facturación potencial desaprovechada.</strong>
             </p>
             <div className="ctas">
-              <Link className="btn blue" href="/v2-leadmagnet">
+              <Link className="btn blue" href="/b-leadmagnet">
                 MEDIR MIS FUGAS →
               </Link>
               <a className="btn ghost" href="#contacto">

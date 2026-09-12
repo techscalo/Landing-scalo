@@ -1,8 +1,8 @@
 export type LeadLanding =
-  | "v1-landing"
-  | "v1-leadmagnet"
-  | "v2-landing"
-  | "v2-leadmagnet";
+  | "a"
+  | "a-leadmagnet"
+  | "b"
+  | "b-leadmagnet";
 
 // Lee los utm_* de la URL actual, si estan. Se usa window.location en vez de
 // useSearchParams para no forzar que cada pagina se saque de rendering

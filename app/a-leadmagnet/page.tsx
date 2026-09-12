@@ -94,7 +94,7 @@ export default function V1LeadMagnet() {
     const whatsapp = `${whatsappCode}${lead.whatsapp}`;
     sessionStorage.setItem("scaloLead", JSON.stringify({ ...lead, whatsapp }));
     sendLead({
-      landing: "v1-leadmagnet",
+      landing: "a-leadmagnet",
       nombre: lead.nombre,
       empresa: lead.empresa,
       whatsapp,
@@ -134,7 +134,7 @@ export default function V1LeadMagnet() {
       setPhase("result");
       const { score, badge, focusKey } = computeResult(next);
       sendLead({
-        landing: "v1-leadmagnet",
+        landing: "a-leadmagnet",
         nombre: lead.nombre,
         empresa: lead.empresa,
         whatsapp: `${whatsappCode}${lead.whatsapp}`,
@@ -189,7 +189,7 @@ export default function V1LeadMagnet() {
       <header className="wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/scalo-black.png" alt="SCALO" />
-        <Link href="/v1-landing">← Volver a la landing</Link>
+        <Link href="/a">← Volver a la landing</Link>
       </header>
       <main className="shell">
         <div className="box">
@@ -300,7 +300,7 @@ export default function V1LeadMagnet() {
                 <p className="sub">{text}</p>
                 <div className="area">{areaMsg[focusKey]}</div>
                 <div className="actions">
-                  <Link className="primary" href="/v1-landing#auditoria">
+                  <Link className="primary" href="/a#auditoria">
                     QUIERO UNA AUDITORÍA →
                   </Link>
                   <a

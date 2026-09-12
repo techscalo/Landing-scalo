@@ -16,7 +16,7 @@ const CUSTOM_FIELD_IDS = {
   utmTerm: "WeiulOOYwtstYVmZxQ0o",
 } as const;
 
-type Landing = "v1-landing" | "v1-leadmagnet" | "v2-landing" | "v2-leadmagnet";
+type Landing = "a" | "a-leadmagnet" | "b" | "b-leadmagnet";
 
 type LeadPayload = {
   landing: Landing;
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
   if (data.utm?.content) customFields.push({ id: CUSTOM_FIELD_IDS.utmContent, value: data.utm.content });
   if (data.utm?.term) customFields.push({ id: CUSTOM_FIELD_IDS.utmTerm, value: data.utm.term });
 
-  const tags = ["landing-scalo", data.landing.startsWith("v1") ? "landing-v1" : "landing-v2"];
+  const tags = ["landing-scalo", data.landing.startsWith("a") ? "landing-a" : "landing-b"];
   if (data.completedLeadMagnet) tags.push("lead-magnet-completado");
 
   const ghlBody = {
