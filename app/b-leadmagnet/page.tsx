@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { sendLead } from "../../lib/sendLead";
 import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
 import { PhoneField } from "../../components/PhoneField";
+import { MetaPixel } from "../../components/MetaPixel";
 
 type Area = "control" | "seguimiento" | "reactivacion" | "medicion";
 
@@ -146,6 +147,7 @@ export default function V2LeadMagnet() {
 
   return (
     <>
+      <MetaPixel />
       <header>
         <div className="wrap nav">
           {/* eslint-disable-next-line @next/next/no-img-element */}

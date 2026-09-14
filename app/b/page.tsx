@@ -5,6 +5,7 @@ import { useState } from "react";
 import { sendLead } from "../../lib/sendLead";
 import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
 import { PhoneField } from "../../components/PhoneField";
+import { MetaPixel } from "../../components/MetaPixel";
 
 export default function V2Landing() {
   const [sent, setSent] = useState(false);
@@ -34,6 +35,7 @@ export default function V2Landing() {
 
   return (
     <>
+      <MetaPixel />
       <header>
         <div className="wrap nav">
           {/* eslint-disable-next-line @next/next/no-img-element */}

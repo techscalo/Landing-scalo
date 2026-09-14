@@ -20,6 +20,13 @@ function getUtmParams() {
   return Object.keys(utm).length > 0 ? utm : undefined;
 }
 
+// El fbclid se guarda en sessionStorage al entrar (ver MetaPixel), asi que
+// sobrevive el paso de landing a leadmagnet igual que el resto del lead.
+function getFbclid() {
+  if (typeof window === "undefined") return undefined;
+  return sessionStorage.getItem("fbclid") || undefined;
+}
+
 export type LeadPayload = {
   landing: LeadLanding;
   nombre?: string;
@@ -42,6 +49,10 @@ export function sendLead(payload: LeadPayload) {
   fetch("/api/lead", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...payload, utm: getUtmParams() }),
+    body: JSON.stringify({
+      ...payload,
+      utm: getUtmParams(),
+      fbclid: getFbclid(),
+    }),
   }).catch(() => {});
 }

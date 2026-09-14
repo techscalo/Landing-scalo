@@ -14,6 +14,11 @@ const CUSTOM_FIELD_IDS = {
   utmCampaign: "KtmZJd2cmbHDGvyYgtFY",
   utmContent: "2S7t3QaRtGGK0cQLYzxr",
   utmTerm: "WeiulOOYwtstYVmZxQ0o",
+  // TODO: reemplazar por el ID real del campo "fbclid" en la location Scalo
+  // Business (6d4eEQ8zGrcNJfwIL6uh) antes de mergear -- no tenemos acceso al
+  // GHL de esa location desde acá para leerlo. Joel dice que el campo ya
+  // existe (contact.fbclid); falta el fieldId para poder escribirlo por API.
+  fbclid: "TODO_FBCLID_FIELD_ID",
 } as const;
 
 type Landing = "a" | "a-leadmagnet" | "b" | "b-leadmagnet";
@@ -39,6 +44,7 @@ type LeadPayload = {
     term?: string;
   };
   completedLeadMagnet?: boolean;
+  fbclid?: string;
 };
 
 export async function POST(req: NextRequest) {
@@ -86,6 +92,7 @@ export async function POST(req: NextRequest) {
   if (data.utm?.campaign) customFields.push({ id: CUSTOM_FIELD_IDS.utmCampaign, value: data.utm.campaign });
   if (data.utm?.content) customFields.push({ id: CUSTOM_FIELD_IDS.utmContent, value: data.utm.content });
   if (data.utm?.term) customFields.push({ id: CUSTOM_FIELD_IDS.utmTerm, value: data.utm.term });
+  if (data.fbclid) customFields.push({ id: CUSTOM_FIELD_IDS.fbclid, value: data.fbclid });
 
   const tags = ["landing-scalo", data.landing.startsWith("a") ? "landing-a" : "landing-b"];
   if (data.completedLeadMagnet) tags.push("lead-magnet-completado");
