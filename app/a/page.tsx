@@ -5,6 +5,7 @@ import { useState } from "react";
 import { sendLead } from "../../lib/sendLead";
 import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
 import { PhoneField } from "../../components/PhoneField";
+import { MetaPixel } from "../../components/MetaPixel";
 
 export default function V1Landing() {
   const [sent, setSent] = useState(false);
@@ -36,6 +37,7 @@ export default function V1Landing() {
 
   return (
     <>
+      <MetaPixel />
       <header>
         <div className="wrap nav">
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { sendLead } from "../../lib/sendLead";
 import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
 import { PhoneField } from "../../components/PhoneField";
+import { MetaPixel } from "../../components/MetaPixel";
 
 type Area = "control" | "seguimiento" | "reactivacion" | "medicion";
 
@@ -186,6 +187,7 @@ export default function V1LeadMagnet() {
 
   return (
     <>
+      <MetaPixel />
       <header className="wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/scalo-black.png" alt="SCALO" />
