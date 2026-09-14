@@ -14,11 +14,7 @@ const CUSTOM_FIELD_IDS = {
   utmCampaign: "KtmZJd2cmbHDGvyYgtFY",
   utmContent: "2S7t3QaRtGGK0cQLYzxr",
   utmTerm: "WeiulOOYwtstYVmZxQ0o",
-  // TODO: reemplazar por el ID real del campo "fbclid" en la location Scalo
-  // Business (6d4eEQ8zGrcNJfwIL6uh) antes de mergear -- no tenemos acceso al
-  // GHL de esa location desde acá para leerlo. Joel dice que el campo ya
-  // existe (contact.fbclid); falta el fieldId para poder escribirlo por API.
-  fbclid: "TODO_FBCLID_FIELD_ID",
+  fbclid: "ppmPZ6YhLz77yKANhM5y",
 } as const;
 
 type Landing = "a" | "a-leadmagnet" | "b" | "b-leadmagnet";
