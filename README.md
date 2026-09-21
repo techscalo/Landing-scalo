@@ -25,3 +25,9 @@ npm run dev
 ## Deploy
 
 Conectado a Vercel (team `techscalo-team`). Cada push a `main` dispara un deploy de producción automático en https://landing-scalo.vercel.app
+
+## Migración del portal PWA anterior
+
+`public/sw.js` reemplaza el service worker de Scalo Portal: se activa sin esperar, deja de interceptar peticiones, cancela su registro y recarga las pestañas controladas. No borra cookies ni almacenamiento del usuario. Mantener esta URL disponible para visitantes que vuelvan meses después.
+
+En Vercel, tanto `scalo.tech` como `www.scalo.tech` deben estar conectados a **Production** en este proyecto. No configurar una redirección a nivel de dominio en `scalo.tech`: el navegador rechaza las redirecciones al actualizar `/sw.js`. `proxy.ts` redirige las demás URLs a `www` y deja el worker accesible directamente en ambos dominios.
