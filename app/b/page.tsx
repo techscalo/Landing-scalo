@@ -40,7 +40,7 @@ export default function V2Landing() {
         <div className="wrap nav">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="logo" src="/scalo-white.png" alt="SCALO" />
-          <Link href="/b-leadmagnet">Test comercial · 2 min →</Link>
+          <Link href="/a-leadmagnet">Test comercial · 2 min →</Link>
         </div>
       </header>
       <main>
@@ -59,7 +59,7 @@ export default function V2Landing() {
               <strong>facturación potencial desaprovechada.</strong>
             </p>
             <div className="ctas">
-              <Link className="btn blue" href="/b-leadmagnet">
+              <Link className="btn blue" href="/a-leadmagnet">
                 MEDIR MIS FUGAS →
               </Link>
               <a className="btn ghost" href="#contacto">

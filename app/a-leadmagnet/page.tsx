@@ -193,7 +193,7 @@ export default function V1LeadMagnet() {
       <header className="wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/scalo-white.png" alt="SCALO" />
-        <Link href="/a">← Volver a la landing</Link>
+        <Link href="/b">← Volver a la landing</Link>
       </header>
       <main className="shell">
         <div className="box">
@@ -322,7 +322,7 @@ export default function V1LeadMagnet() {
                 <p className="sub">{text}</p>
                 <div className="area">{areaMsg[focusKey]}</div>
                 <div className="actions">
-                  <Link className="primary" href="/a#auditoria">
+                  <Link className="primary" href="/b#contacto">
                     QUIERO UNA AUDITORÍA →
                   </Link>
                   <a

@@ -1,16 +1,17 @@
 # Landing Scalo
 
-Landings y lead magnets de Scalo (Scalo System™) reconstruidos en **Next.js 16** (App Router, TypeScript).
+Landing y diagnóstico comercial de Scalo en **Next.js 16** (App Router, TypeScript).
 
 ## Rutas
 
 | Ruta | Descripción |
 |------|-------------|
-| `/` | Hub con las 4 previews |
-| `/v1-landing` | Landing clara + formulario de auditoría |
-| `/v1-leadmagnet` | Quiz de 10 preguntas con diagnóstico por puntaje |
-| `/v2-landing` | Landing oscura ("fugas comerciales") + formulario |
-| `/v2-leadmagnet` | Scorecard con modal de captura y diagnóstico por área |
+| `/b` | Landing oscura + formulario de auditoría |
+| `/a-leadmagnet` | Diagnóstico de 10 preguntas con resultado y enlace a `/b#contacto` |
+| `/` y `/a` | Redirección permanente a `/b` |
+| `/b-leadmagnet` | Redirección permanente a `/a-leadmagnet` |
+
+Las redirecciones conservan los parámetros de campaña de la URL. Ya no se distribuyen visitas entre variantes A/B.
 
 ## Desarrollo
 
