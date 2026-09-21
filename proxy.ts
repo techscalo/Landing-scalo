@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export function proxy(request: NextRequest) {
   // Vercel must connect BOTH domains to this project (no domain-level redirect).
   // A service-worker update cannot follow the apex -> www redirect.
-  if (request.nextUrl.hostname === "scalo.tech" && request.nextUrl.pathname !== "/sw.js") {
+  const hostname = request.headers.get("host")?.split(":")[0].toLowerCase();
+  if (hostname === "scalo.tech" && request.nextUrl.pathname !== "/sw.js") {
     const url = request.nextUrl.clone();
     url.hostname = "www.scalo.tech";
     url.protocol = "https:";
