@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { sendLead } from "../../lib/sendLead";
 import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
@@ -40,7 +39,7 @@ export default function V2Landing() {
         <div className="wrap nav">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="logo" src="/scalo-white.png" alt="SCALO" />
-          <Link href="/a-leadmagnet">Test comercial · 2 min →</Link>
+          <a href="/a-leadmagnet">Test comercial · 2 min →</a>
         </div>
       </header>
       <main>
@@ -59,9 +58,9 @@ export default function V2Landing() {
               <strong>facturación potencial desaprovechada.</strong>
             </p>
             <div className="ctas">
-              <Link className="btn blue" href="/a-leadmagnet">
+              <a className="btn blue" href="/a-leadmagnet">
                 MEDIR MIS FUGAS →
-              </Link>
+              </a>
               <a className="btn ghost" href="#contacto">
                 Quiero hablar con Scalo
               </a>

@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import type { Metadata, Viewport } from "next";
 import { DarkSurface } from "../../components/DarkSurface";
 
@@ -31,6 +32,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#08080a" };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  // Always serve fresh HTML; hashed images, CSS and JS remain cacheable.
+  await connection();
   return <DarkSurface variant="landing">{children}</DarkSurface>;
 }

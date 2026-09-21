@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { sendLead } from "../../lib/sendLead";
 import { DEFAULT_COUNTRY_CODE } from "../../lib/countryCodes";
@@ -193,7 +192,7 @@ export default function V1LeadMagnet() {
       <header className="wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/scalo-white.png" alt="SCALO" />
-        <Link href="/b">← Volver a la landing</Link>
+        <a href="/b">← Volver a la landing</a>
       </header>
       <main className="shell" data-phase={phase}>
         <div className="box">
@@ -322,9 +321,9 @@ export default function V1LeadMagnet() {
                 <p className="sub">{text}</p>
                 <div className="area">{areaMsg[focusKey]}</div>
                 <div className="actions">
-                  <Link className="primary" href="/b#contacto">
+                  <a className="primary" href="/b#contacto">
                     QUIERO UNA AUDITORÍA →
-                  </Link>
+                  </a>
                   <a
                     className="secondary"
                     href="#"
