@@ -786,6 +786,22 @@
     font-size: 9px;
   }
 }
+/* Mobile forms stay readable without triggering iOS focus zoom. */
+@media (max-width: 760px) {
+  .surface input { font-size: 16px; }
+  .surface header a { min-height: 44px; display: inline-flex; align-items: center; }
+  .surface :global(.row), .surface :global(.formgrid) { grid-template-columns: 1fr; }
+  .surface :global(.shell[data-phase="quiz"]),
+  .surface :global(.shell[data-phase="result"]) { padding-top: 26px; }
+  .surface :global(.shell:not([data-phase="gate"]) .side) h1 { font-size: 30px; margin-block: 16px 0; }
+  .surface :global(.shell:not([data-phase="gate"]) .side) p,
+  .surface :global(.shell:not([data-phase="gate"]) .diagnostic-meta),
+  .surface :global(.shell:not([data-phase="gate"]) .mini) { display: none; }
+}
+@media (max-width: 480px) {
+  .surface :global(.actions) a { width: 100%; font-size: 12px; }
+  .surface :global(.send), .surface :global(.cta) { min-height: 52px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .surface *,
   .surface *::before,

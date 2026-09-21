@@ -195,7 +195,7 @@ export default function V1LeadMagnet() {
         <img src="/scalo-white.png" alt="SCALO" />
         <Link href="/b">← Volver a la landing</Link>
       </header>
-      <main className="shell">
+      <main className="shell" data-phase={phase}>
         <div className="box">
           <aside className="side">
             <div>
