@@ -110,8 +110,8 @@ export default function V1LeadMagnet() {
       score >= 8
         ? "Sistema aceitado"
         : score >= 5
-        ? "Perdiendo eficiencia"
-        : "Fugas comerciales";
+          ? "Perdiendo eficiencia"
+          : "Fugas comerciales";
     const misses: Record<Area, number> = {
       control: 0,
       seguimiento: 0,
@@ -121,7 +121,9 @@ export default function V1LeadMagnet() {
     list.forEach((a) => {
       if (!a.value) misses[a.area]++;
     });
-    const focusKey = Object.entries(misses).sort((a, b) => b[1] - a[1])[0][0] as Area;
+    const focusKey = Object.entries(misses).sort(
+      (a, b) => b[1] - a[1],
+    )[0][0] as Area;
     return { score, badge, focusKey };
   }
 
@@ -181,16 +183,16 @@ export default function V1LeadMagnet() {
   answers.forEach((a) => {
     if (!a.value) misses[a.area]++;
   });
-  const focusKey = (Object.entries(misses).sort(
-    (a, b) => b[1] - a[1]
-  )[0][0] as Area);
+  const focusKey = Object.entries(misses).sort(
+    (a, b) => b[1] - a[1],
+  )[0][0] as Area;
 
   return (
     <>
       <MetaPixel />
       <header className="wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/scalo-black.png" alt="SCALO" />
+        <img src="/scalo-white.png" alt="SCALO" />
         <Link href="/a">← Volver a la landing</Link>
       </header>
       <main className="shell">
@@ -204,9 +206,14 @@ export default function V1LeadMagnet() {
                 oportunidades que ya generás o dejando ventas sobre la mesa.
               </p>
             </div>
+            <div className="diagnostic-meta">
+              <span>10 preguntas</span>
+              <span>4 áreas clave</span>
+              <span>Tu resultado al instante</span>
+            </div>
             <div className="mini">Menos clicks, más SCALO.</div>
           </aside>
-          <section className="content">
+          <section className="content" aria-live="polite">
             {phase === "gate" && (
               <div>
                 <div className="step">Paso 1 de 2 — Tus datos</div>
@@ -218,8 +225,11 @@ export default function V1LeadMagnet() {
                 <form onSubmit={startQuiz}>
                   <div className="formgrid">
                     <div className="field">
-                      <label>Nombre y apellido</label>
+                      <label htmlFor="a-leadmagnet-nombre">
+                        Nombre y apellido
+                      </label>
                       <input
+                        id="a-leadmagnet-nombre"
                         required
                         name="nombre"
                         autoComplete="name"
@@ -230,8 +240,9 @@ export default function V1LeadMagnet() {
                       />
                     </div>
                     <div className="field">
-                      <label>Empresa</label>
+                      <label htmlFor="a-leadmagnet-empresa">Empresa</label>
                       <input
+                        id="a-leadmagnet-empresa"
                         required
                         name="empresa"
                         autoComplete="organization"
@@ -242,8 +253,9 @@ export default function V1LeadMagnet() {
                       />
                     </div>
                     <div className="field">
-                      <label>WhatsApp</label>
+                      <label htmlFor="a-leadmagnet-whatsapp">WhatsApp</label>
                       <PhoneField
+                        id="a-leadmagnet-whatsapp"
                         code={whatsappCode}
                         onCodeChange={setWhatsappCode}
                         number={lead.whatsapp}
@@ -253,8 +265,9 @@ export default function V1LeadMagnet() {
                       />
                     </div>
                     <div className="field">
-                      <label>Email</label>
+                      <label htmlFor="a-leadmagnet-email">Email</label>
                       <input
+                        id="a-leadmagnet-email"
                         required
                         type="email"
                         name="email"
@@ -273,7 +286,14 @@ export default function V1LeadMagnet() {
             {phase === "quiz" && (
               <div className="quiz">
                 <div className="step">Paso 2 de 2 — Diagnóstico</div>
-                <div className="progress">
+                <div
+                  className="progress"
+                  role="progressbar"
+                  aria-label="Progreso del diagnóstico"
+                  aria-valuemin={0}
+                  aria-valuemax={qs.length}
+                  aria-valuenow={i}
+                >
                   <div
                     className="bar"
                     style={{ width: `${(i / qs.length) * 100}%` }}
@@ -321,289 +341,6 @@ export default function V1LeadMagnet() {
           </section>
         </div>
       </main>
-
-      <style jsx global>{`
-        html, body { overflow-x: hidden; max-width: 100%; }
-        .panel, .side, .modalbox, .card, .formgrid, .field, .grid > * { min-width: 0; }
-        select, input, textarea { min-width: 0; max-width: 100%; }
-
-        :root {
-          --light: #e3e3e3;
-          --ink: #1c1a1b;
-          --gray: #545454;
-          --blue: #38546c;
-          --white: #fff;
-        }
-        body {
-          background: var(--light);
-          color: var(--ink);
-          font-family: "Montserrat", "Arial Narrow", Arial, sans-serif;
-        }
-        .wrap {
-          width: min(980px, calc(100% - 34px));
-          margin: auto;
-        }
-        header {
-          padding: 24px 0;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        header img {
-          width: 155px;
-        }
-        header a {
-          font-size: 13px;
-          text-decoration: none;
-          color: var(--gray);
-        }
-        .shell {
-          min-height: calc(100vh - 92px);
-          display: grid;
-          place-items: center;
-          padding: 28px 0 70px;
-        }
-        .box {
-          width: min(920px, 100%);
-          background: #fff;
-          border: 1px solid rgba(28, 26, 27, 0.12);
-          box-shadow: 0 22px 60px rgba(28, 26, 27, 0.08);
-          min-height: 580px;
-          display: grid;
-          grid-template-columns: 300px 1fr;
-        }
-        .side {
-          background: var(--blue);
-          color: #fff;
-          padding: 34px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          overflow: hidden;
-          position: relative;
-        }
-        .side:after {
-          content: "";
-          position: absolute;
-          right: -80px;
-          bottom: -75px;
-          width: 270px;
-          height: 270px;
-          background: url("/scalo-iso.png") center/contain no-repeat;
-          opacity: 0.08;
-        }
-        .side .tag {
-          font-size: 11px;
-          letter-spacing: 0.13em;
-          text-transform: uppercase;
-          font-weight: 800;
-        }
-        .side h1 {
-          font-size: 35px;
-          line-height: 1.02;
-          letter-spacing: -0.045em;
-          margin: 18px 0;
-        }
-        .side p {
-          font-size: 14px;
-          line-height: 1.55;
-          color: #d9e2e8;
-        }
-        .side .mini {
-          font-size: 12px;
-          color: #c7d3dc;
-          position: relative;
-          z-index: 2;
-        }
-        .content {
-          padding: 34px 42px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        .step {
-          font-size: 11px;
-          color: var(--gray);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-weight: 800;
-          margin-bottom: 14px;
-        }
-        h2 {
-          font-size: 31px;
-          line-height: 1.12;
-          margin: 0 0 10px;
-          letter-spacing: -0.035em;
-        }
-        .sub {
-          color: var(--gray);
-          font-size: 14px;
-          line-height: 1.55;
-          margin: 0 0 22px;
-        }
-        .formgrid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-        }
-        label {
-          font-size: 11px;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-        }
-        .field {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-        input {
-          padding: 13px;
-          border: 1px solid #c9c9c9;
-          border-radius: 4px;
-          font: inherit;
-        }
-        .full {
-          grid-column: 1 / -1;
-        }
-        button {
-          font: inherit;
-        }
-        .cta {
-          width: 100%;
-          border: 0;
-          background: var(--ink);
-          color: #fff;
-          padding: 15px 17px;
-          font-weight: 800;
-          border-radius: 4px;
-          cursor: pointer;
-          margin-top: 14px;
-        }
-        .progress {
-          height: 4px;
-          background: #dedede;
-          margin: 0 0 27px;
-        }
-        .bar {
-          height: 100%;
-          background: var(--blue);
-          width: 0;
-          transition: 0.25s;
-        }
-        .qnum {
-          font-size: 12px;
-          font-weight: 800;
-          color: var(--blue);
-          letter-spacing: 0.09em;
-          text-transform: uppercase;
-          margin-bottom: 14px;
-        }
-        .question {
-          font-size: 29px;
-          line-height: 1.18;
-          letter-spacing: -0.035em;
-          font-weight: 800;
-          min-height: 140px;
-          display: flex;
-          align-items: center;
-        }
-        .choices {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-          margin-top: 20px;
-        }
-        .choice {
-          padding: 18px;
-          border: 1px solid #bdbdbd;
-          background: #fff;
-          cursor: pointer;
-          text-align: left;
-          font-weight: 800;
-          font-size: 15px;
-          border-radius: 5px;
-        }
-        .choice:hover {
-          border-color: var(--blue);
-          background: #f4f6f8;
-        }
-        .choice strong {
-          font-size: 18px;
-          margin-right: 8px;
-          color: var(--blue);
-        }
-        .score {
-          font-size: 78px;
-          line-height: 0.85;
-          font-weight: 800;
-          letter-spacing: -0.07em;
-          color: var(--blue);
-          margin: 10px 0 17px;
-        }
-        .badge {
-          display: inline-block;
-          padding: 8px 10px;
-          background: var(--ink);
-          color: #fff;
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 0.09em;
-          text-transform: uppercase;
-          border-radius: 3px;
-        }
-        .result h2 {
-          margin-top: 16px;
-        }
-        .area {
-          border-left: 4px solid var(--blue);
-          padding: 12px 16px;
-          background: #f1f3f4;
-          margin: 18px 0;
-          font-size: 14px;
-          line-height: 1.55;
-        }
-        .actions {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-        }
-        .actions a {
-          text-decoration: none;
-          padding: 13px 16px;
-          border-radius: 4px;
-          font-size: 13px;
-          font-weight: 800;
-        }
-        .actions .primary {
-          background: var(--blue);
-          color: #fff;
-        }
-        .actions .secondary {
-          border: 1px solid var(--ink);
-        }
-        @media (max-width: 760px) {
-          .box {
-            grid-template-columns: 1fr;
-          }
-          .side {
-            min-height: 210px;
-          }
-          .content {
-            padding: 30px 24px;
-          }
-          .formgrid {
-            grid-template-columns: 1fr;
-          }
-          .full {
-            grid-column: 1;
-          }
-          .question {
-            font-size: 25px;
-            min-height: 170px;
-          }
-        }
-      `}</style>
     </>
   );
 }

@@ -14,6 +14,7 @@ function flagUrl(iso: string) {
 // Selector de código de país con banderas reales (no emoji: en Windows los
 // <select> nativos no renderizan los emoji de bandera, se ven como texto).
 export function PhoneField({
+  id,
   code,
   onCodeChange,
   number,
@@ -21,6 +22,7 @@ export function PhoneField({
   name = "whatsapp",
   required = true,
 }: {
+  id?: string;
   code: string;
   onCodeChange: (code: string) => void;
   number: string;
@@ -135,6 +137,7 @@ export function PhoneField({
       )}
 
       <input
+        id={id}
         required={required}
         name={name}
         type="tel"
